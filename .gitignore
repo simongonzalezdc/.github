@@ -1,0 +1,13 @@
+# Local environment and secret material
+.env
+.env.*
+*.pem
+*.key
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Python local cache
+__pycache__/
+*.py[cod]
