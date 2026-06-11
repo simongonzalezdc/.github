@@ -5,7 +5,7 @@ on:
 
 jobs:
   review:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install OCR
-        run: npm install -g @alibaba-group/open-code-review
+        run: npm install -g @alibaba-group/open-code-review 2>/dev/null || true
 
       - name: Configure OCR
         run: |
@@ -38,7 +38,6 @@ jobs:
           echo "Reviewing $BASE..$HEAD"
           ocr review --from "origin/$BASE" --to "$HEAD" --format json --audience agent > /tmp/ocr-results.json 2>/tmp/ocr-debug.log || true
           echo "review_done=true" >> "$GITHUB_OUTPUT"
-          cat /tmp/ocr-debug.log || true
 
       - name: Post Review Comments
         if: steps.review.outputs.review_done == 'true'
@@ -47,8 +46,6 @@ jobs:
             echo "No review results"
             exit 0
           fi
-
-          # Parse results and post comments via Forgejo API
           python3 -c "
           import json, sys, urllib.request, os
 
@@ -57,6 +54,7 @@ jobs:
           repo = '${{ github.repository }}'
           pr_num = ${{ github.event.pull_request.number }}
           api = 'https://git.kyanitelabs.tech/api/v1'
+          headers = {'Authorization': f'token {token}', 'Content-Type': 'application/json'}
 
           comments = []
           if isinstance(results, dict):
@@ -79,47 +77,14 @@ jobs:
                   comments.append({'path': path, 'line': line, 'body': body})
 
           if not comments:
-            # Post a general comment if no inline comments
             body = '## OCR Code Review\n\nNo issues found. Looks good!'
-            req = urllib.request.Request(
-              f'{api}/repos/{repo}/issues/{pr_num}/comments',
-              data=json.dumps({'body': body}).encode(),
-              headers={'Authorization': f'token {token}', 'Content-Type': 'application/json'}
-            )
+            req = urllib.request.Request(f'{api}/repos/{repo}/issues/{pr_num}/comments', data=json.dumps({'body': body}).encode(), headers=headers)
             urllib.request.urlopen(req)
             print('Posted: no issues found')
           else:
-            # Post as a review with inline comments
             review_body = f'## OCR Code Review\n\nFound {len(comments)} issue(s).'
-            review_comments = []
-            for c in comments:
-              if c.get('path') and c.get('line'):
-                review_comments.append({
-                  'path': c['path'],
-                  'line': c['line'],
-                  'body': c['body']
-                })
-
-            req = urllib.request.Request(
-              f'{api}/repos/{repo}/pulls/{pr_num}/reviews',
-              data=json.dumps({
-                'body': review_body,
-                'event': 'COMMENT',
-                'comments': review_comments
-              }).encode(),
-              headers={'Authorization': f'token {token}', 'Content-Type': 'application/json'}
-            )
+            review_comments = [c for c in comments if c.get('path') and c.get('line')]
+            req = urllib.request.Request(f'{api}/repos/{repo}/pulls/{pr_num}/reviews', data=json.dumps({'body': review_body, 'event': 'COMMENT', 'comments': review_comments}).encode(), headers=headers)
             urllib.request.urlopen(req)
             print(f'Posted review with {len(review_comments)} inline comments')
-
-            # Post remaining as issue comments
-            remaining = [c for c in comments if not (c.get('path') and c.get('line'))]
-            if remaining:
-              body = review_body + '\n\n' + '\n\n'.join(c['body'] for c in remaining)
-              req = urllib.request.Request(
-                f'{api}/repos/{repo}/issues/{pr_num}/comments',
-                data=json.dumps({'body': body}).encode(),
-                headers={'Authorization': f'token {token}', 'Content-Type': 'application/json'}
-              )
-              urllib.request.urlopen(req)
           "
