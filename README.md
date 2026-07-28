@@ -1,24 +1,22 @@
-# Simon Gonzalez De Cruz GitHub Defaults
+# simongonzalezdc `.github`
 
-This repository holds shared public GitHub defaults for repositories owned by Simon Gonzalez De Cruz.
+Shared public defaults for repositories owned by Simon Gonzalez De Cruz.
 
-## What Lives Here
+## Contents
 
-- `profile/README.md` is the public GitHub organization/profile README content.
-- `.github/workflows/` contains reusable repository-health and agent-law checks.
-- `.github/pull_request_template.md` gives pull requests a consistent review shape.
-- `docs/agent-law/` documents the shared agent workflow rules used across repos.
-- `scripts/provision-agent-law.py` helps copy the shared guidance into target repositories.
+| Path | Job |
+| --- | --- |
+| [`profile/README.md`](profile/README.md) | Public GitHub profile README |
+| `.github/workflows/` | Repo-health and agent-law checks |
+| `.github/pull_request_template.md` | Consistent PR review shape |
+| `docs/agent-law/` | Shared agent workflow rules |
+| `scripts/provision-agent-law.py` | Copy shared guidance into target repos |
 
-## How To Use It
+## Use
 
-Use this repo as the source of truth for public repository defaults and agent-facing workflow guidance. Product-specific README content should stay in each product repository; this repo only defines reusable defaults, templates, and shared doctrine.
+Treat this repo as the source of truth for **defaults, templates, and doctrine**. Product copy and install paths live in each product repo—not here.
 
-## Maintenance Notes
-
-- Keep shared guidance generic enough to apply across repos.
-- Put product-specific instructions in the target repo instead of here.
-- Update this README when a new default file, workflow, or provisioning script becomes part of the shared surface.
+When you add a workflow, template, or provisioning script, update this README in the same change.
 
 ## License
 
