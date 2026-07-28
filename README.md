@@ -1,22 +1,28 @@
 # simongonzalezdc `.github`
 
-Shared public defaults for repositories owned by Simon Gonzalez De Cruz.
+Shared defaults for repositories under [simongonzalezdc](https://github.com/simongonzalezdc).
 
-## Contents
+## What’s in this repo
 
 | Path | Job |
 | --- | --- |
-| [`profile/README.md`](profile/README.md) | Public GitHub profile README |
-| `.github/workflows/` | Repo-health and agent-law checks |
-| `.github/pull_request_template.md` | Consistent PR review shape |
+| [`profile/README.md`](profile/README.md) | Public GitHub profile |
+| `.github/workflows/` | Agent-law and health checks |
+| `.github/pull_request_template.md` | PR template |
 | `docs/agent-law/` | Shared agent workflow rules |
-| `scripts/provision-agent-law.py` | Copy shared guidance into target repos |
+| `scripts/provision-agent-law.py` | Provision those rules into target repos |
 
-## Use
+Product README and install docs stay in each product repo.
 
-Treat this repo as the source of truth for **defaults, templates, and doctrine**. Product copy and install paths live in each product repo—not here.
+<!-- EMPOWER_ORCHESTRATOR:START -->
+## Agent-law contribution rule
 
-When you add a workflow, template, or provisioning script, update this README in the same change.
+This repository follows the Empower Orchestrator law in `docs/agent-law/empower-orchestrator.md`.
+
+If a change exposes a repeated task or repeated agent failure, contributors and agents should either ship the smallest durable prevention artifact or explain why this PR is intentionally one-off.
+
+Automation and durable system changes require the scale/severity/reversibility/predictability blast-radius check before dispatch.
+<!-- EMPOWER_ORCHESTRATOR:END -->
 
 ## License
 
