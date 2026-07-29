@@ -1,29 +1,14 @@
-# simongonzalezdc `.github`
+# Simon Gonzalez De Cruz
 
-Shared defaults for repositories under [simongonzalezdc](https://github.com/simongonzalezdc).
+Builder working across local-first tools, consulting ops (PuenteWorks), and agent-ready systems. Public product work ships under [Kyanite Labs](https://github.com/KyaniteLabs) and personal repos here.
 
-## What’s in this repo
+## Selected work
 
-| Path | Job |
-| --- | --- |
-| [`profile/README.md`](profile/README.md) | Public GitHub profile |
-| `.github/workflows/` | Agent-law and health checks |
-| `.github/pull_request_template.md` | PR template |
-| `docs/agent-law/` | Shared agent workflow rules |
-| `scripts/provision-agent-law.py` | Provision those rules into target repos |
+- [Kinocut](https://github.com/KyaniteLabs/kinocut) — local-first agent video tooling
+- [chance](https://github.com/simongonzalezdc/chance) — multi-source randomness studio
+- [PuenteWorks](https://github.com/simongonzalezdc/puenteworks) — consulting / ops workspace
+- [agent-policy](https://github.com/simongonzalezdc/agent-policy) — durable cross-agent policy source
 
-Product README and install docs stay in each product repo.
+## Defaults
 
-<!-- EMPOWER_ORCHESTRATOR:START -->
-## Agent-law contribution rule
-
-This repository follows the Empower Orchestrator law in `docs/agent-law/empower-orchestrator.md`.
-
-If a change exposes a repeated task or repeated agent failure, contributors and agents should either ship the smallest durable prevention artifact or explain why this PR is intentionally one-off.
-
-Automation and durable system changes require the scale/severity/reversibility/predictability blast-radius check before dispatch.
-<!-- EMPOWER_ORCHESTRATOR:END -->
-
-## License
-
-See [LICENSE](LICENSE).
+This `.github` repo holds profile and org-default surfaces for `simongonzalezdc/*`. Prefer product READMEs for install paths.
