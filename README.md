@@ -1,14 +1,25 @@
-# Simon Gonzalez De Cruz
+# Simon Gonzalez De Cruz GitHub Defaults
 
-Builder working across local-first tools, consulting ops (PuenteWorks), and agent-ready systems. Public product work ships under [Kyanite Labs](https://github.com/KyaniteLabs) and personal repos here.
+This repository holds shared public GitHub defaults for repositories owned by Simon Gonzalez De Cruz.
 
-## Selected work
+## What Lives Here
 
-- [Kinocut](https://github.com/KyaniteLabs/kinocut) — local-first agent video tooling
-- [chance](https://github.com/simongonzalezdc/chance) — multi-source randomness studio
-- [PuenteWorks](https://github.com/simongonzalezdc/puenteworks) — consulting / ops workspace
-- [agent-policy](https://github.com/simongonzalezdc/agent-policy) — durable cross-agent policy source
+- `profile/README.md` is the public GitHub organization/profile README content.
+- `.github/workflows/` contains reusable repository-health and agent-law checks.
+- `.github/pull_request_template.md` gives pull requests a consistent review shape.
+- `docs/agent-law/` documents the shared agent workflow rules used across repos.
+- `scripts/provision-agent-law.py` helps copy the shared guidance into target repositories.
 
-## Defaults
+## How To Use It
 
-This `.github` repo holds profile and org-default surfaces for `simongonzalezdc/*`. Prefer product READMEs for install paths.
+Use this repo as the source of truth for public repository defaults and agent-facing workflow guidance. Product-specific README content should stay in each product repository; this repo only defines reusable defaults, templates, and shared doctrine.
+
+## Maintenance Notes
+
+- Keep shared guidance generic enough to apply across repos.
+- Put product-specific instructions in the target repo instead of here.
+- Update this README when a new default file, workflow, or provisioning script becomes part of the shared surface.
+
+## License
+
+See [LICENSE](LICENSE).
